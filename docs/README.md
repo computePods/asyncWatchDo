@@ -140,13 +140,13 @@ files:
 
 Logfiles for each task:
 webServer
-  tail -f /tmp/cpawd-20210724-171805/command.log
+  tail -f /tmp/cpawd-20210724-171805/webServer/command.log
 computePods
-  tail -f /tmp/cpawd-20210724-171805/command.log
+  tail -f /tmp/cpawd-20210724-171805/computePods/command.log
 pythonUtils
-  tail -f /tmp/cpawd-20210724-171805/command.log
+  tail -f /tmp/cpawd-20210724-171805/pythonUtils/command.log
 interfaces
-  tail -f /tmp/cpawd-20210724-171805/command.log
+  tail -f /tmp/cpawd-20210724-171805/interfaces/command.log
 
 ---------------------------------------------------------------
 ```
