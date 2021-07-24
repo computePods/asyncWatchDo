@@ -79,7 +79,7 @@ def loadConfig(cliArgs) :
   for aTaskName, aTask in config['tasks'].items() :
     aTask['workDir'] = os.path.join(workDir, aTaskName)
     os.makedirs(aTask['workDir'])
-    aTask['logFilePath'] = os.path.join(workDir, 'command.log')
+    aTask['logFilePath'] = os.path.join(workDir, aTaskName, 'command.log')
     if 'projectDir' in aTask :
       aTask['projectDir'] = os.path.expanduser(aTask['projectDir'])
     else:

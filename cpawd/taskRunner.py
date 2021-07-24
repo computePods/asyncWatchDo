@@ -24,7 +24,7 @@ class DebouncingTimer:
     print(f'Ran: {self.taskName}')
     if stdout:
         self.taskLog.write("\n============================================================================\n")
-        self.taskLog.write("stdout @ {}\n".format(time.strftime("%Y/%m/%d %H:%M:%S")))
+        self.taskLog.write("{} stdout @ {}\n".format(self.taskName, time.strftime("%Y/%m/%d %H:%M:%S")))
         self.taskLog.write("{}\n".format(self.taskCmd))
         self.taskLog.write("----------------------------------------------------------------------------\n")
         self.taskLog.write(stdout.decode())
@@ -32,7 +32,7 @@ class DebouncingTimer:
         self.taskLog.flush()
     if stderr:
         self.taskLog.write("\n============================================================================\n")
-        self.taskLog.write("stderr @ {}\n".format(time.strftime("%Y/%m/%d %H:%M:%S")))
+        self.taskLog.write("{} stderr @ {}\n".format(self.taskName, time.strftime("%Y/%m/%d %H:%M:%S")))
         self.taskLog.write("{}\n".format(self.taskCmd))
         self.taskLog.write("----------------------------------------------------------------------------\n")
         self.taskLog.write(stderr.decode())
