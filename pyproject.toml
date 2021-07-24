@@ -1,0 +1,34 @@
+[project]
+name = "ComputePodAsyncWatchDo"
+version = "0.0.1"
+description = "A simple async based tool to watch-do multiple directories/commands at once."
+authors = [
+    {name = "Stephen Gaito", email = "stephen@perceptisys.co.uk"},
+]
+dependencies = [
+    "asyncinotify~=2.0",
+    "pyyaml~=5.4",
+    "jinja2~=3.0",
+]
+requires-python = ">=3.9"
+dynamic = ["classifiers"]
+license = {text = "Apache-2.0"}
+
+[project.urls]
+homepage = "https://github.com/computePods/asyncWatchDo"
+
+[project.scripts]
+cpawd = "cpawd:cli"
+
+[project.optional-dependencies]
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "aiofiles~=0.7",
+    "aioshutil~=1.1",
+]

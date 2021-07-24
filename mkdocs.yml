@@ -1,0 +1,12 @@
+site_name: ComputePods Python Utilities
+
+plugins:
+  - search
+  - awesome-pages
+  - mkdocstrings:
+      watch:
+        - cputils
+        - tests
+
+theme:
+  name: material
