@@ -1,12 +1,17 @@
-personal_ws-1.1 en 11 
+personal_ws-1.1 en 16 
 AsyncWatchDo
 ComputePods
 Gaito
 Richberger
+YAML
 async
+asyncio
 cmd
 cpMask
 cpawd
+dicts
 inotify
+str
 subdirectories
 utf
+workDir

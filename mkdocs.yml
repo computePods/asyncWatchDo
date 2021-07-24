@@ -1,12 +1,15 @@
-site_name: ComputePods Python Utilities
+site_name: ComputePods Async Watch-Do tool
+
+site_url: https://computepods.github.io/asyncWatchDo/
+
+repo_url: https://github.com/computePods/asyncWatchDo
 
 plugins:
   - search
   - awesome-pages
   - mkdocstrings:
       watch:
-        - cputils
-        - tests
+        - cpawd
 
 theme:
   name: material

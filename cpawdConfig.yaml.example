@@ -1,0 +1,25 @@
+tasks:
+  webServer:
+    watch:
+      - html
+    cmd: "livereload"
+
+  computePods:
+    projectDir: ~/dev/computePods/computePods.github.io
+    watch:
+      - docs
+    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html"
+
+  pythonUtils:
+    projectDir: ~/dev/computePods/html/pythonUtils
+    watch:
+      - cputils
+      - tests
+    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/pythonUtils"
+
+  interfaces:
+    projectDir: ~/dev/computePods/interfaces
+    watch:
+      - docs
+      - interaces
+    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/interfaces"
