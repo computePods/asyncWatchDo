@@ -1,0 +1,3 @@
+# cpawd.loadConfiguration
+
+::: cpawd.loadConfiguration

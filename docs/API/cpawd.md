@@ -1,0 +1,3 @@
+# cpawd.cli
+
+::: cpawd.cli

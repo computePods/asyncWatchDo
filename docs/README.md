@@ -101,7 +101,7 @@ tasks:
   webServer:
     watch:
       - html
-    cmd: "livereload"
+    cmd: "livereload {webServer[workDir]}/html"
 
   computePods:
     projectDir: ~/dev/computePods/computePods.github.io
@@ -124,11 +124,27 @@ tasks:
     cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/interfaces"
 ```
 
-Note that the `{webServer[workDir]}` in each `cmd` will be dynamically
-replaced (using the `str.format` function) to the value of the `webServer`
-watch-do task's `workDir`. Note also that since we have not provided
-either of the `verbose` or `workDir` sections, they will automatically
-default to `False` and `/tmp/cpawd-YYYYMMDD-HHMMSS`.
+**Notes**:
+
+- The `{webServer[workDir]}` in each of the above `cmd` keys will be
+dynamically replaced (using the `str.format` function) to the value of the
+`webServer` watch-do task's `workDir`.
+
+- You can add your own keys in each of the tasks. These keys will also be
+available to the command `str.format` function invocation.
+
+- Since we have not provided either of the `verbose` or `workDir`
+sections, they will automatically default to `False` and
+`/tmp/cpawd-YYYYMMDD-HHMMSS`.
+
+- This example `cpawdConfig.yaml` file implements a simple
+multi-repository `mkdocs` tool, similar to
+[`monorepo`](https://github.com/backstage/mkdocs-monorepo-plugin). However
+by using `cpawd` to implement a multi-repository `mkdocs` tool, the
+`mkdocs` invocations in each repository are *completely* separate from
+each other. (Alas, when using `monorepo` to implement multi-repository
+documentation, the `monorepo` extension interferes with many of the other
+`mkdocs` extensions).
 
 ## Output
 

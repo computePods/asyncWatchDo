@@ -10,6 +10,16 @@
 # in the ComputePods AsyncWatchDo project using the original code's MIT
 # license.
 
+"""
+
+This cpawd.fsWatcher module adapts the
+[asyncinotify](https://asyncinotify.readthedocs.io/en/latest/)
+[example](https://gitlab.com/Taywee/asyncinotify/-/blob/master/examples/recursivewatch.py)
+to recursively watch directories or files either by a direct request, or
+as they are created inside watched directories.
+
+"""
+
 import asyncio
 from asyncinotify import Inotify, Event, Mask
 import logging
@@ -18,6 +28,19 @@ import sys
 import traceback
 
 class FSWatcher :
+  """
+
+  The `FSWatcher` class manages the Linux file system `inotify` watches
+  for a given collection of directories or files. It provides a file
+  change event stream via the iterable `recursive_watch` method.
+
+  To allow for asynchronous operation, the "watches" are added to an
+  `asyncio.Queue` managed by the `managePathsToWatchQueue` method. When
+  used, this `managePathsToWatchQueue` method should be run inside its own
+  `asyncio.Task`.
+
+  """
+
   def __init__(self) :
     self.inotify            = Inotify()
     self.pathsToWatchQueue  = asyncio.Queue()
@@ -46,12 +69,14 @@ class FSWatcher :
 
   def get_directories_recursive(self, path) :
     '''
+
     Recursively list all directories under path, including path itself, if
     it's a directory.
 
     The path itself is always yielded before its children are iterated, so you
     can pre-process a path (by watching it with inotify) before you get the
     directory listing.
+
     '''
     if path.is_dir() :
       yield path
@@ -61,9 +86,26 @@ class FSWatcher :
       yield path
 
   async def watchAPath(self, pathToWatch) :
+    """
+
+    Add a single directory or file to be watched by this instance of
+    `FSWatcher` to the `pathsToWatchQueue`.
+
+    """
+
     await self.pathsToWatchQueue.put(pathToWatch)
 
   async def managePathsToWatchQueue(self) :
+    """
+
+    Implement all (pending) requests to watch a directory or file which
+    are in the `pathsToWatchQueue`.
+
+    The paths contained in all directories are themselves recursively
+    added to the `pathsToWatchQueue`.
+
+    """
+
     while True :
       aPathToWatch = await self.pathsToWatchQueue.get()
       for aPath in self.get_directories_recursive(Path(aPathToWatch)) :
@@ -84,7 +126,14 @@ class FSWatcher :
 
   # provide the inotify events stream
 
-  async def watch_recursive(self):
+  async def watchForFileSystemEvents(self):
+    """
+
+    An asynchronously interable method which yields file system change
+    events.
+
+    """
+
     # Things that can throw this off:
     #
     # * Moving a watched directory out of the watch tree (will still
@@ -133,15 +182,3 @@ class FSWatcher :
         self.logger.debug(f'UNYIELDED EVENT: {event}')
 
 ########################################################################
-
-# Example use:
-
-async def watchForInotifyEvents(watches, natsClient):
-  async for event in watch_recursive(watches):
-    # logger.info ( f'MAIN: got {event} for path {event.path}')
-    theMsg = {
-      'mask': str(event.mask),
-      'path': str(event.path)
-    }
-    logger.info(f'MAIN: {theMsg}')
-    await natsClient.sendMessage("silly", theMsg)

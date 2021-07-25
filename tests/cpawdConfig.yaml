@@ -1,0 +1,7 @@
+tasks:
+  test:
+    projectDir: .
+    watch:
+      - testFiles
+    someThingToEcho: This is a test!
+    cmd: "echo '{test[someThingToEcho]}'"

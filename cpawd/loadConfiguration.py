@@ -1,4 +1,7 @@
-# Load and normalise the cpawd configuration
+"""
+Load and normalise the cpawd configuration
+
+"""
 
 import os
 import shutil
@@ -8,9 +11,13 @@ import traceback
 import yaml
 
 def mergeYamlData(yamlData, newYamlData, thePath) :
-  # This is a generic Python merge
-  # It is a *deep* merge and handles both dictionaries and arrays
-  #
+  """
+
+  This is a generic Python merge. It is a *deep* merge and handles both
+  dictionaries and arrays
+
+  """
+
   if type(yamlData) is None :
     print("ERROR yamlData should NEVER be None ")
     sys.exit(-1)
@@ -39,6 +46,32 @@ def mergeYamlData(yamlData, newYamlData, thePath) :
     sys.exit(-1)
 
 def loadConfig(cliArgs) :
+  """
+
+  Load the configuration by merging any `cpawdConfig.yaml` found in the
+  current working directory, and then any other configuration files
+  specified on the command line.
+
+  Then perform the following normalisation:
+
+  - The base working directory is computed using the `baseDir` and
+  `prefix` keys found in the `workDir` section of the merged
+  configuration.
+
+  - Compute `workDir` for each task in the `tasks` section of the merged
+  configuration.
+
+  - Ensure all `workDir` exists (both for the base and the individual
+  tasks)
+
+  - Expand all watched paths to an absolute path in the file system.
+
+  - Check that the `projectDir` exists for each task.
+
+  - Compute logFilePaths and open logFiles for each task.
+
+  """
+
   config = {
     'workDir' : {
       'baseDir' : '/tmp',
@@ -81,9 +114,16 @@ def loadConfig(cliArgs) :
     os.makedirs(aTask['workDir'])
     aTask['logFilePath'] = os.path.join(workDir, aTaskName, 'command.log')
     if 'projectDir' in aTask :
-      aTask['projectDir'] = os.path.expanduser(aTask['projectDir'])
+      aTask['projectDir'] = os.path.abspath(os.path.expanduser(aTask['projectDir']))
     else:
       aTask['projectDir'] = aTask['workDir']
+
+    if not os.path.exists(aTask['projectDir']) :
+      print("ERROR: the projectDir for task {} MUST exist in the file system".format(aTaskName))
+      print("---------------------------------------------------------")
+      print(yaml.dump(aTask))
+      print("---------------------------------------------------------")
+      sys.exit(-1)
 
     if 'watch' not in aTask or not aTask['watch'] :
       print("ERROR: all tasks MUST have a collection of files/directories to watch")
