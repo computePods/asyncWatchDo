@@ -282,6 +282,84 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API/cpawd/" class="md-nav__link">
+        cpawd.cli
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API/fsWatcher/" class="md-nav__link">
+        cpawd.fsWatcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API/loadConfiguration/" class="md-nav__link">
+        cpawd.loadConfiguration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API/taskRunner/" class="md-nav__link">
+        cpawd.taskRunner
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -451,7 +529,7 @@ optional arguments:
   webServer:
     watch:
       - html
-    cmd: &quot;livereload&quot;
+    cmd: &quot;livereload {webServer[workDir]}/html&quot;
 
   computePods:
     projectDir: ~/dev/computePods/computePods.github.io
@@ -473,11 +551,33 @@ optional arguments:
       - interaces
     cmd: &quot;mkdocs --verbose --site-dir {webServer[workDir]}/html/interfaces&quot;
 </code></pre>
-<p>Note that the <code>{webServer[workDir]}</code> in each <code>cmd</code> will be dynamically
-replaced (using the <code>str.format</code> function) to the value of the <code>webServer</code>
-watch-do task's <code>workDir</code>. Note also that since we have not provided
-either of the <code>verbose</code> or <code>workDir</code> sections, they will automatically
-default to <code>False</code> and <code>/tmp/cpawd-YYYYMMDD-HHMMSS</code>.</p>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li>
+<p>The <code>{webServer[workDir]}</code> in each of the above <code>cmd</code> keys will be
+dynamically replaced (using the <code>str.format</code> function) to the value of the
+<code>webServer</code> watch-do task's <code>workDir</code>.</p>
+</li>
+<li>
+<p>You can add your own keys in each of the tasks. These keys will also be
+available to the command <code>str.format</code> function invocation.</p>
+</li>
+<li>
+<p>Since we have not provided either of the <code>verbose</code> or <code>workDir</code>
+sections, they will automatically default to <code>False</code> and
+<code>/tmp/cpawd-YYYYMMDD-HHMMSS</code>.</p>
+</li>
+<li>
+<p>This example <code>cpawdConfig.yaml</code> file implements a simple
+multi-repository <code>mkdocs</code> tool, similar to
+<a href="https://github.com/backstage/mkdocs-monorepo-plugin"><code>monorepo</code></a>. However
+by using <code>cpawd</code> to implement a multi-repository <code>mkdocs</code> tool, the
+<code>mkdocs</code> invocations in each repository are <em>completely</em> separate from
+each other. (Alas, when using <code>monorepo</code> to implement multi-repository
+documentation, the <code>monorepo</code> extension interferes with many of the other
+<code>mkdocs</code> extensions).</p>
+</li>
+</ul>
 <h2 id="output">Output</h2>
 <p>When run, the <code>cpawd</code> command will out put a list of the configured log
 files:</p>
@@ -515,6 +615,26 @@ respective tasks as they are run.</p>
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+      
+        
+        <a href="API/cpawd/" class="md-footer__link md-footer__link--next" aria-label="Next: cpawd.cli" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              cpawd.cli
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
