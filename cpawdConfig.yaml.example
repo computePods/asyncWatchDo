@@ -11,7 +11,7 @@ tasks:
     cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html"
 
   pythonUtils:
-    projectDir: ~/dev/computePods/html/pythonUtils
+    projectDir: ~/dev/computePods/pythonUtils
     watch:
       - cputils
       - tests
