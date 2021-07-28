@@ -25,8 +25,6 @@ from .fsWatcher import FSWatcher
 
 logger = logging.getLogger("taskRunner")
 
-debouncingTimers = []
-
 class DebouncingTimer:
   """
 
@@ -53,7 +51,6 @@ class DebouncingTimer:
     self.taskDir    = taskDetails['projectDir']
     self.taskFuture = None
     self.proc       = None
-    debouncingTimers.append(self)
 
   def cancelTask(self) :
     if self.taskFuture :
@@ -171,6 +168,9 @@ class DebouncingTimer:
     logger.debug("Starting {} timer".format(self.taskName))
     self.taskFuture = asyncio.ensure_future(self.taskRunner())
 
+watchers         = []
+debouncingTimers = []
+
 async def watchDo(aTaskName, aTask) :
   """
 
@@ -180,14 +180,16 @@ async def watchDo(aTaskName, aTask) :
 
   """
   logger.debug("Starting asyncio.Task for {}".format(aTaskName))
-  aWatcher = FSWatcher()
+  aWatcher = FSWatcher(logger)
+  watchers.append(aWatcher)
   taskLog  = await aiofiles.open(aTask['logFilePath'], 'w')
   aTimer   = DebouncingTimer(1, aTaskName, aTask, taskLog)
+  debouncingTimers.append(aTimer)
 
   # add watches
   asyncio.create_task(aWatcher.managePathsToWatchQueue())
   for aWatch in aTask['watch'] :
-    await aWatcher.watchAPath(aWatch)
+    await aWatcher.watchARootPath(aWatch)
 
   # Ensure the task is run at least once
   await aTimer.reStart()
@@ -199,9 +201,14 @@ async def watchDo(aTaskName, aTask) :
 
 async def stopTasks() :
   logger.info("Stopping all tasks")
+
+  for aWatcher in watchers :
+    aWatcher.stopWatchingFileSystem()
+
   for aTimer in debouncingTimers :
     await aTimer.stopTaskProc()
     aTimer.cancelTask()
+
   logger.debug("All tasks Stoped")
 
 shutdownTasks = asyncio.Event()
