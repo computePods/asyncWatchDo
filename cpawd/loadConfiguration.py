@@ -3,6 +3,7 @@ Load and normalise the cpawd configuration
 
 """
 
+import aiofiles
 import os
 import shutil
 import sys
@@ -45,6 +46,14 @@ def mergeYamlData(yamlData, newYamlData, thePath) :
     print("ERROR yamlData MUST be either a dictionary or an array.")
     sys.exit(-1)
 
+def taskError(message, aTask) :
+  print("ERROR:")
+  print(message)
+  print("---------------------------------------------------------")
+  print(yaml.dump(aTask))
+  print("---------------------------------------------------------")
+  sys.exit(-1)
+
 def loadConfig(cliArgs) :
   """
 
@@ -84,6 +93,9 @@ def loadConfig(cliArgs) :
   if cliArgs.verbose :
     config['verbose'] = cliArgs.verbose
 
+  if cliArgs.debug :
+    config['debug'] = cliArgs.debug
+
   cliArgs.config.insert(0,'cpawdConfig.yaml')
   for aConfigPath in cliArgs.config :
     if os.path.exists(aConfigPath) :
@@ -119,34 +131,36 @@ def loadConfig(cliArgs) :
       aTask['projectDir'] = aTask['workDir']
 
     if not os.path.exists(aTask['projectDir']) :
-      print("ERROR: the projectDir for task {} MUST exist in the file system".format(aTaskName))
-      print("---------------------------------------------------------")
-      print(yaml.dump(aTask))
-      print("---------------------------------------------------------")
-      sys.exit(-1)
+      taskError(
+        "the projectDir for task {} MUST exist in the file system".format(aTaskName),
+        aTask
+      )
 
     if 'watch' not in aTask or not aTask['watch'] :
-      print("ERROR: all tasks MUST have a collection of files/directories to watch")
-      print("       no 'watch' list provided in task [{}]:".format(aTaskName))
-      print("---------------------------------------------------------")
-      print(yaml.dump(aTask))
-      print("---------------------------------------------------------")
-      sys.exit(-1)
+      taskError("all tasks MUST have a collection of files/directories to watch\nno 'watch' list provided in task [{}]:".format(aTaskName), aTask)
     expandedWatches = []
     for aWatch in aTask['watch'] :
       newWatch = os.path.expanduser(aWatch)
       if not newWatch.startswith('/') :
         newWatch = os.path.join(aTask['projectDir'], newWatch)
+        os.makedirs(newWatch, exist_ok=True)
       expandedWatches.append(newWatch)
     aTask['watch'] = expandedWatches
 
-  # expand commands and open logFiles
+  # expand commands
   for aTaskName, aTask in config['tasks'].items() :
+    if 'cmd' not in aTask :
+      taskError("all tasks MUST have a cmd; no cmd provied in task [{}]".format(aTaskName), aTask)
+    if type(aTask['cmd']) is not list :
+      taskError("task cmds MUST be a list of command followed by arguments\nfound type: {} in task {}".format(type(aTask['cmd']), aTaskName), aTask)
     try :
-      aTask['cmd'] = aTask['cmd'].format(**config['tasks'])
+      newCmd = []
+      for anArgument in aTask['cmd'] :
+        newCmd.append(anArgument.format(**config['tasks']))
+      aTask['cmd'] = newCmd
     except Exception as err :
       print("Could not expand variables in cmd string:")
-      print(aTask['cmd'])
+      print(yaml.dump(aTask['cmd']))
       print(repr(err))
 
   if config['verbose'] :
@@ -155,10 +169,9 @@ def loadConfig(cliArgs) :
     print(yaml.dump(config))
     print("---------------------------------------------------------------")
 
-  # open log files
+  # announce log files
   print("\nLogfiles for each task:")
   for aTaskName, aTask in config['tasks'].items() :
-    aTask['logFile'] = open(aTask['logFilePath'], 'w')
     print("{}\n  tail -f {}".format(aTaskName, aTask['logFilePath']))
   print("")
   print("---------------------------------------------------------------")

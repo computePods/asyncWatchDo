@@ -3,5 +3,6 @@ tasks:
     projectDir: .
     watch:
       - testFiles
-    someThingToEcho: This is a test!
-    cmd: "echo '{test[someThingToEcho]}'"
+    #someThingToEcho: This is a test!
+    #cmd: "echo '{test[someThingToEcho]}'"
+    cmd: "cat testFiles/fileToChange"

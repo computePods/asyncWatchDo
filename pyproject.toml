@@ -8,7 +8,8 @@ authors = [
 dependencies = [
     "asyncinotify~=2.0",
     "pyyaml~=5.4",
-    "jinja2~=3.0",
+    "aiofiles~=0.7",
+    "aioshutil~=1.1",
 ]
 requires-python = ">=3.9"
 dynamic = ["classifiers"]
@@ -27,8 +28,3 @@ build-backend = "pdm.pep517.api"
 
 [tool]
 [tool.pdm]
-[tool.pdm.dev-dependencies]
-dev = [
-    "aiofiles~=0.7",
-    "aioshutil~=1.1",
-]

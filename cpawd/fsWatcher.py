@@ -92,7 +92,7 @@ class FSWatcher :
     `FSWatcher` to the `pathsToWatchQueue`.
 
     """
-
+    self.logger.debug("Adding path to watch queue {}".format(pathToWatch))
     await self.pathsToWatchQueue.put(pathToWatch)
 
   async def managePathsToWatchQueue(self) :

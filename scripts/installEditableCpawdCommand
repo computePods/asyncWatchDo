@@ -21,8 +21,8 @@ cmdScript=$(pdm info | grep Packages | cut -d' ' -f5)/bin/cpawd
 cat << CMD_SCRIPT > $HOME/.local/bin/cpawd
 #!/bin/sh
 
-# This shell script was created by the ComputePods NATS logger
-#       './scripts/installEditableCploggerCommand'
+# This shell script was created by the ComputePods async watch-do tool
+#       './scripts/installEditableCpawdCommand'
 # script.
 
 exec $cmdScript \$@
