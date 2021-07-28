@@ -19,7 +19,7 @@ license = {text = "Apache-2.0"}
 homepage = "https://github.com/computePods/asyncWatchDo"
 
 [project.scripts]
-cpawd = "cpawd:cli"
+cpawd = "cpawd:cpawd"
 
 [project.optional-dependencies]
 [build-system]

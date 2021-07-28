@@ -1,1 +1,1 @@
-from .cli import cli
+from .cpawd import cpawd

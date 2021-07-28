@@ -167,10 +167,17 @@ def loadConfig(cliArgs) :
     print("configuration:")
     print("---------------------------------------------------------------")
     print(yaml.dump(config))
-    print("---------------------------------------------------------------")
+
+  # announce User Messages
+  print("---------------------------------------------------------------")
+  print("\nTool tips:\n")
+  for aTaskName, aTask in config['tasks'].items() :
+    if 'toolTips' in aTask :
+      print("{}\n  {}".format(aTaskName, aTask['toolTips']))
 
   # announce log files
-  print("\nLogfiles for each task:")
+  print("\n---------------------------------------------------------------")
+  print("\nLogfiles for each task:\n")
   for aTaskName, aTask in config['tasks'].items() :
     print("{}\n  tail -f {}".format(aTaskName, aTask['logFilePath']))
   print("")

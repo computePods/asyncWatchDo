@@ -13,7 +13,7 @@ import signal
 from .loadConfiguration import loadConfig
 from .taskRunner import runTasks, shutdownTasks
 
-def cli() :
+def cpawd() :
   """
 
   Parse the command line arguments, load the configuration, and then run
@@ -55,6 +55,7 @@ def cli() :
 
     """
     print("")
+    print("Shutting down...")
     logger.info("SignalHandler: Caught signal {}".format(signum))
     shutdownTasks.set()
 
