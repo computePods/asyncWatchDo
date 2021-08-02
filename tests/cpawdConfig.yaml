@@ -5,4 +5,6 @@ tasks:
       - testFiles
     #someThingToEcho: This is a test!
     #cmd: "echo '{test[someThingToEcho]}'"
-    cmd: "cat testFiles/fileToChange"
+    cmd:
+      - cat
+      - testFiles/fileToChange

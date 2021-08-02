@@ -1,9 +1,5 @@
-"""
-
-Implements the command line interface for the ComputePods Async based
-Watch-Do tool.
-
-"""
+""" Implements the command line interface for the ComputePods Async based
+Watch-Do tool. """
 
 import argparse
 import asyncio
@@ -14,12 +10,8 @@ from .loadConfiguration import loadConfig
 from .taskRunner import runTasks, shutdownTasks
 
 def cpawd() :
-  """
-
-  Parse the command line arguments, load the configuration, and then run
-  the tasks using the `asyncio.run` method.
-
-  """
+  """ Parse the command line arguments, load the configuration, and then
+  run the tasks using the `asyncio.run` method. """
 
 
   argparser = argparse.ArgumentParser(
@@ -35,6 +27,9 @@ def cpawd() :
   argparser.add_argument("-d", "--debug", default=False,
     action=argparse.BooleanOptionalAction,
     help="provide debugging output"
+  )
+  argparser.add_argument("-p", "--pager", default="moar",
+    help="pager to use in task list (default=moar)"
   )
   cliArgs = argparser.parse_args()
 

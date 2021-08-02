@@ -56,6 +56,7 @@ arguments, `--verbose` (to report the loaded configuration), `--config`
 ```
 dev:~/dev/computePods/asyncWatchDo$ cpawd --help
 usage: cpawd [-h] [-c CONFIG] [-v | --verbose | --no-verbose]
+             [-d | --debug | --no-debug] [-p PAGER]
 
 Asynchronously watch multiple directories and perform actions on changes.
 
@@ -64,23 +65,49 @@ optional arguments:
   -c CONFIG, --config CONFIG
                         overlay configuration from file
   -v, --verbose, --no-verbose
-                        provide more detailed output (default: False)
+                        show the loaded configuration (default: False)
+  -d, --debug, --no-debug
+                        provide debugging output (default: False)
+  -p PAGER, --pager PAGER
+                        pager to use in task list (default=moar)
 ```
 ## Configuration file
 
 The `cpawdConfig.yaml` file expects three sections:
 
 - **tasks**: is a dict of watch-do task descriptions, each of which
-  is itself a dict with the keys, `cmd`, `projectDir`, and `watch`. The
-  `projectDir` key provides a single main directory from which all of the
-  watch paths are expected to be located relatively. The `watch` key is a
-  list of paths, relative to the `projectDir`, to be (recursively) watched
-  for changes. The `cmd` key is a command line which should be run
-  whenever any change is detected. (If no `projectDir` is provided, it
-  will be assigned to the `workDir`. The `watch` paths, can be specified
-  with either a leading `~` or `/`. Watch paths with leading `~` will be
-  relative to the user's home directory. Watch paths with leading `/` are
-  assumed to be absolute paths and are not altered.)
+  is itself a dict with the keys:
+
+    - **cmd** : is a list of command line arguments which will be run
+      (using exec) whenever any change is detected. Arguments can use the
+      python `str.format` to dynamically add information from the tasks
+      dictionary. You can use this to ensure commands for one task, can
+      use information, such as `workDir`, from any other configured task
+      (see example below).
+
+    - **projectDir** : provides a single main directory from which all of
+      the watch paths are expected to be located relatively. If no
+      `projectDir` is provided, it will be assigned to the `workDir`.
+
+    - **watch** : is a list of paths, relative to the projectDir, to be
+      (recursively) watched for changes. The `watch` paths, can,
+      optionally, be specified with either a leading `~` or `/`. Watch
+      paths with leading `~` will be relative to the user's home
+      directory. Watch paths with leading `/` are assumed to be absolute
+      paths and are not altered. Watch paths with no leading `~` or `/`
+      are assumed to be relative to the projectDir.
+
+    - **runOnce** : is a key which, if it exists, ensures the command is
+      only run once (and is never restarted on file system events). You
+      can use this for any command which provides its own file system
+      watch abilities.
+
+    - **toolTips** : is a string which will be echoed to the user. You can
+      use this, for example, to inform the user of the configured URL
+      provided by a web-server task.
+
+    All other keys will be provided to the `str.format` when expanding
+    either the command arguments or the toolTips (see the example below).
 
 - **verbose**: is a Boolean which if `True`, will report the loaded
   configuration. The default is `False`.
@@ -99,29 +126,54 @@ An example `cpawdConfig.yaml` configuration file might be:
 ```yaml
 tasks:
   webServer:
+    runOnce: true
+    toolTips: "http://localhost:{webServer[port]}"
+    port: "8008"
     watch:
       - html
-    cmd: "livereload {webServer[workDir]}/html"
+    cmd:
+      - cphttp
+      - -v
+      - -l
+      - debug
+      - p
+      - "{webServer[port]}"
+      - -d
+      - "{webServer[workDir]}/html"
+      - -w
+      - "{webServer[workDir]}/html"
 
   computePods:
     projectDir: ~/dev/computePods/computePods.github.io
     watch:
       - docs
-    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html"
+    cmd:
+      - mkdocs
+      - --verbose
+      - --site-dir
+      - "{webServer[workDir]}/html"
 
   pythonUtils:
     projectDir: ~/dev/computePods/pythonUtils
     watch:
       - cputils
       - tests
-    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/pythonUtils"
+    cmd:
+      - mkdocs
+      - --verbose
+      - --site-dir
+      - "{webServer[workDir]}/html/pythonUtils"
 
   interfaces:
     projectDir: ~/dev/computePods/interfaces
     watch:
       - docs
       - interaces
-    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/interfaces"
+    cmd:
+      - mkdocs
+      - --verbose
+      - --site-dir
+      - "{webServer[workDir]}/html/interfaces"
 ```
 
 **Notes**:
@@ -130,8 +182,9 @@ tasks:
 dynamically replaced (using the `str.format` function) to the value of the
 `webServer` watch-do task's `workDir`.
 
-- You can add your own keys in each of the tasks. These keys will also be
-available to the command `str.format` function invocation.
+- You can add your own keys in each of the tasks (for example the `port`
+key in the example above). These keys will also be available to the
+command or toolTips `str.format` function invocation.
 
 - Since we have not provided either of the `verbose` or `workDir`
 sections, they will automatically default to `False` and
@@ -148,27 +201,36 @@ documentation, the `monorepo` extension interferes with many of the other
 
 ## Output
 
-When run, the `cpawd` command will out put a list of the configured log
-files:
+When run, the `cpawd` command will out put a list of the configured
+toolTips and log files:
 
 ```
+Tool tips:
+
+webServer
+  http://localhost:8008
+
 ---------------------------------------------------------------
 
 Logfiles for each task:
 webServer
   tail -f /tmp/cpawd-20210724-171805/webServer/command.log
+  moar /tmp/cpawd-20210724-171805/webServer/command.log
 computePods
   tail -f /tmp/cpawd-20210724-171805/computePods/command.log
+  moar /tmp/cpawd-20210724-171805/computePods/command.log
 pythonUtils
   tail -f /tmp/cpawd-20210724-171805/pythonUtils/command.log
+  moar /tmp/cpawd-20210724-171805/pythonUtils/command.log
 interfaces
   tail -f /tmp/cpawd-20210724-171805/interfaces/command.log
+  moar /tmp/cpawd-20210724-171805/interfaces/command.log
 
 ---------------------------------------------------------------
 ```
 
-This list of log files is then followed by a "stream of consciousness"
-list of tasks run.
+This list of toolTips and log files is then followed by a "stream of
+consciousness" list of tasks run.
 
 If you copy and paste any of the log file commands (as above) in the 'tab'
 of a terminal emulator, you will be able to watch the outputs of the

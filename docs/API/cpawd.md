@@ -1,3 +1,3 @@
 # cpawd.cli
 
-::: cpawd.cli
+::: cpawd.cpawd

@@ -23,6 +23,32 @@ from pathlib import Path
 import sys
 import traceback
 
+masksToListenFor = [
+  [ Mask.CLOSE_WRITE, "CLOSE_WRITE" ],
+  [ Mask.CREATE,      "CREATE"      ],
+  [ Mask.MODIFY,      "MODIFY"      ],
+  [ Mask.MOVE,        "MOVE"        ],
+  [ Mask.DELETE,      "DELETE"      ],
+  [ Mask.DELETE_SELF, "DELETE_SELF" ]
+]
+
+def getMaskName(aMask) :
+  """ Translate a raw Mask number into a human readable name. """
+
+  maskName = ""
+  for aPotentialMask in masksToListenFor :
+    if aMask & aPotentialMask[0] :
+      maskName = maskName + ' ' + aPotentialMask[1]
+  return maskName.lstrip()
+
+def getMasksToListenFor() :
+  """ Compute the module's list of `masksToLisentFor` into a single mask. """
+
+  masks = 0
+  for aMask in masksToListenFor :
+    masks = masks | aMask[0]
+  return masks
+
 class FSWatcher :
   """ The `FSWatcher` class manages the Linux file system `inotify`
   watches for a given collection of directories or files. It provides a
@@ -53,11 +79,12 @@ class FSWatcher :
     # Mask.OPEN would notify on files being opened
     # Mask.UNMOUNT would notify on a file system being unmounted
     #
-    self.cpMask = Mask.CLOSE_WRITE | Mask.CREATE | Mask.MODIFY | Mask.MOVE | Mask.DELETE | Mask.DELETE_SELF
+    self.cpMask = getMasksToListenFor()
     #
     # Now we add in Masks we need for this module's book-keeping
     #
     self.wrMask = self.cpMask | Mask.MASK_ADD | Mask.MOVED_FROM | Mask.MOVED_TO | Mask.CREATE | Mask.DELETE_SELF | Mask.IGNORED
+
 
   def getRootPaths(self) :
     return self.rootPaths

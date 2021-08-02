@@ -147,7 +147,7 @@ def loadConfig(cliArgs) :
       expandedWatches.append(newWatch)
     aTask['watch'] = expandedWatches
 
-  # expand commands
+  # expand toolTips and commands
   for aTaskName, aTask in config['tasks'].items() :
     if 'cmd' not in aTask :
       taskError("all tasks MUST have a cmd; no cmd provied in task [{}]".format(aTaskName), aTask)
@@ -161,6 +161,13 @@ def loadConfig(cliArgs) :
     except Exception as err :
       print("Could not expand variables in cmd string:")
       print(yaml.dump(aTask['cmd']))
+      print(repr(err))
+
+    try :
+      aTask['toolTips'] = aTask['toolTips'].format(**config['tasks'])
+    except Exception as err :
+      print("Could not expand variables in toolTips string:")
+      print(yaml.dump(aTask['toolTips']))
       print(repr(err))
 
   if config['verbose'] :
@@ -180,6 +187,7 @@ def loadConfig(cliArgs) :
   print("\nLogfiles for each task:\n")
   for aTaskName, aTask in config['tasks'].items() :
     print("{}\n  tail -f {}".format(aTaskName, aTask['logFilePath']))
+    print("  {} {}".format(cliArgs.pager, aTask['logFilePath']))
   print("")
   print("---------------------------------------------------------------")
   print("")
