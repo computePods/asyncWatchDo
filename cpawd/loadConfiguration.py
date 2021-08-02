@@ -163,12 +163,13 @@ def loadConfig(cliArgs) :
       print(yaml.dump(aTask['cmd']))
       print(repr(err))
 
-    try :
-      aTask['toolTips'] = aTask['toolTips'].format(**config['tasks'])
-    except Exception as err :
-      print("Could not expand variables in toolTips string:")
-      print(yaml.dump(aTask['toolTips']))
-      print(repr(err))
+    if 'toolTips' in aTask :
+      try :
+        aTask['toolTips'] = aTask['toolTips'].format(**config['tasks'])
+      except Exception as err :
+        print("Could not expand variables in toolTips string:")
+        print(yaml.dump(aTask['toolTips']))
+        print(repr(err))
 
   if config['verbose'] :
     print("configuration:")

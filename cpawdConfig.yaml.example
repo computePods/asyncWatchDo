@@ -1,25 +1,50 @@
 tasks:
   webServer:
+    runOnce: true
+    toolTips: "http://localhost:{webServer[port]}"
+    port: "8008"
     watch:
       - html
-    cmd: "livereload"
+    cmd:
+      - cphttp
+      - -v
+      - -l
+      - debug
+      - p
+      - "{webServer[port]}"
+      - -d
+      - "{webServer[workDir]}/html"
+      - -w
+      - "{webServer[workDir]}/html"
 
   computePods:
     projectDir: ~/dev/computePods/computePods.github.io
     watch:
       - docs
-    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html"
+    cmd:
+      - mkdocs
+      - --verbose
+      - --site-dir
+      - "{webServer[workDir]}/html"
 
   pythonUtils:
     projectDir: ~/dev/computePods/pythonUtils
     watch:
       - cputils
       - tests
-    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/pythonUtils"
+    cmd:
+      - mkdocs
+      - --verbose
+      - --site-dir
+      - "{webServer[workDir]}/html/pythonUtils"
 
   interfaces:
     projectDir: ~/dev/computePods/interfaces
     watch:
       - docs
       - interaces
-    cmd: "mkdocs --verbose --site-dir {webServer[workDir]}/html/interfaces"
+    cmd:
+      - mkdocs
+      - --verbose
+      - --site-dir
+      - "{webServer[workDir]}/html/interfaces"
