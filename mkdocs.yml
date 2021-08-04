@@ -6,6 +6,7 @@ repo_url: https://github.com/computePods/asyncWatchDo
 
 plugins:
   - search
+  - compute-pods
   - awesome-pages
   - mermaid2
   - mkdocstrings:
