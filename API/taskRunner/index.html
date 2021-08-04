@@ -1,849 +1,943 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-        <link rel="canonical" href="https://computepods.github.io/asyncWatchDo/API/taskRunner/">
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
-    
-    
-      
-        <title>cpawd.taskRunner - ComputePods Async Watch-Do tool</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
-        
-      
-    
-    
-    
-      
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
-    
-    
-      
+<!DOCTYPE html>
 
-
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
-  
-    
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#cpawdtaskrunner" class="md-skip">
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://computepods.github.io/asyncWatchDo/API/taskRunner/" rel="canonical"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.2, mkdocs-material-7.1.11" name="generator"/>
+<title>cpawd.taskRunner - ComputePods Async Watch-Do tool</title>
+<link href="../../assets/stylesheets/main.3754935a.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.f1a3b89f.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+<link href="../../assets/_mkdocstrings.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="none" data-md-color-primary="none" data-md-color-scheme="" dir="ltr">
+<script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#cpawdtaskrunner">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="ComputePods Async Watch-Do tool" class="md-header__button md-logo" aria-label="ComputePods Async Watch-Do tool" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="ComputePods Async Watch-Do tool" class="md-header__button md-logo" data-md-component="logo" href="/" title="ComputePods Async Watch-Do tool">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             ComputePods Async Watch-Do tool
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               cpawd.taskRunner
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
 <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list"></ol>
 </div>
-    
-    
-      <div class="md-header__source">
-        
-<a href="https://github.com/computePods/asyncWatchDo/" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/computePods/asyncWatchDo/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-      </div>
-    
-  </nav>
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="ComputePods Async Watch-Do tool" class="md-nav__button md-logo" aria-label="ComputePods Async Watch-Do tool" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="ComputePods Async Watch-Do tool" class="md-nav__button md-logo" data-md-component="logo" href="/" title="ComputePods Async Watch-Do tool">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
     ComputePods Async Watch-Do tool
   </label>
-  
-    <div class="md-nav__source">
-      
-<a href="https://github.com/computePods/asyncWatchDo/" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/computePods/asyncWatchDo/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
         ComputePods Asynchronous Watch-Do tools
       </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
-      
-      <label class="md-nav__link" for="__nav_2">
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
         API
         <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="API" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="API" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
           API
         </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cpawd/" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../cpawd/">
         cpawd.cli
       </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../fsWatcher/" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../fsWatcher/">
         cpawd.fsWatcher
       </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../loadConfiguration/" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../loadConfiguration/">
         cpawd.loadConfiguration
       </a>
-    </li>
-  
-
-          
-            
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
           cpawd.taskRunner
           <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
         cpawd.taskRunner
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner" class="md-nav__link">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner">
     cpawd.taskRunner
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer">
     DebouncingTimer
   </a>
-  
-    <nav class="md-nav" aria-label="DebouncingTimer">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer.__init__" class="md-nav__link">
+<nav aria-label="DebouncingTimer" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.__init__">
     __init__()
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer.reStart" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.cancelTimer">
+    cancelTimer()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.captureOutput">
+    captureOutput()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.captureRetCode">
+    captureRetCode()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.procIsRunning">
+    procIsRunning()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.reStart">
     reStart()
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer.taskRunner" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.stopTaskProc">
+    stopTaskProc()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.taskRunner">
     taskRunner()
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.runTasks" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.runTasks">
     runTasks()
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.watchDo" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.stopTasks">
+    stopTasks()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.waitForShutdown">
+    waitForShutdown()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.watchDo">
     watchDo()
   </a>
-  
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-      
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-  </ul>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner" class="md-nav__link">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner">
     cpawd.taskRunner
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer">
     DebouncingTimer
   </a>
-  
-    <nav class="md-nav" aria-label="DebouncingTimer">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer.__init__" class="md-nav__link">
+<nav aria-label="DebouncingTimer" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.__init__">
     __init__()
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer.reStart" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.cancelTimer">
+    cancelTimer()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.captureOutput">
+    captureOutput()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.captureRetCode">
+    captureRetCode()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.procIsRunning">
+    procIsRunning()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.reStart">
     reStart()
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.DebouncingTimer.taskRunner" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.stopTaskProc">
+    stopTaskProc()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.DebouncingTimer.taskRunner">
     taskRunner()
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.runTasks" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.runTasks">
     runTasks()
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cpawd.taskRunner.watchDo" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.stopTasks">
+    stopTasks()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.waitForShutdown">
+    waitForShutdown()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cpawd.taskRunner.watchDo">
     watchDo()
   </a>
-  
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                  <a href="https://github.com/computePods/asyncWatchDo/edit/master/docs/API/taskRunner.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="cpawdtaskrunner">cpawd.taskRunner</h1>
-
-
-  <div class="doc doc-object doc-module">
-
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/computePods/asyncWatchDo/edit/master/docs/API/taskRunner.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="cpawdtaskrunner">cpawd.taskRunner</h1>
+<div class="doc doc-object doc-module">
 <a id="cpawd.taskRunner"></a>
-    <div class="doc doc-contents first">
+<div class="doc doc-contents first">
+<p>This cpawd.taskRunner module implements the running of all watch-do
+tasks.</p>
+<hr/>
+<p>The following description is illustrated in the interaction diagram below.</p>
+<p>The top level <code>runTasks</code> method initiates an <code>asyncio.Tasks</code> running the
+<code>watchDo</code> method for each watch-do task. The <code>watchDo</code> method <code>reStart</code>s
+an <code>asyncio.Task</code>, <code>taskRunner</code>, via a call to <code>asyncio.ensure_future</code>, to
+manage a (potentially long running) OS process. The <code>watchDo</code> task
+listens, in an <code>FSWatcher.watchForFileSystemEvents</code> loop, for any file
+system changes which might be happening, <code>reStart</code>ing the <code>taskRunner</code>
+task on any such changes.</p>
+<p>The <code>taskRunner</code> task starts by sleeping, during which time the
+<code>taskRunner</code> task can be cancelled and <code>reStart</code>ed (by the <code>watchDo</code>
+task). This short timeout period of cancel-able sleep acts as a debouncing
+timer. It allows the <code>watchDo</code> task to frequently <code>reStart</code> the
+<code>taskRunner</code> task without actually running the external OS process until
+any nearly simultaneous file system changes have stopped.</p>
+<p>If the <code>taskRunner</code> is not cancelled during the sleep, the <code>taskRunner</code>
+starts the OS process, using a call to <code>asyncio.create_subprocess_exec</code>,
+and then creates two further <code>asyncio.Tasks</code>, <code>captureStdout</code> and
+<code>captureRetCode</code>, to manage the process's output as well as to wait for
+the process's return code.</p>
+<p>Once an external OS process has been started, any <code>reStart</code> requests from
+the <code>watchDo</code> task, signals the <code>captureStdout</code> task to stop listening for
+the process's stdout, and then sends a <code>SIGHUP</code> signal to the process
+(which <em>must</em> respond by gracefully exiting). The <code>watchDo</code> task then
+<code>wait</code>s on the <code>taskRunner</code> task to finish before creating a new
+<code>taskRunner</code> task (and potentially repeating this cycle).</p>
+<p>The <code>main</code> <code>cpawd</code> task, can at any time request that the <code>runTasks</code> task
+shutdown. To shutdown, the <code>runTasks</code> task first signals all of the
+<code>watchDo</code> <code>FSWatcher.watchForFileSystemEvents</code> loops to stop watching for
+file system events. Then the <code>runTasks</code> task signals all running
+<code>taskRunners</code> to stop.</p>
+<hr/>
+<p>In this interaction diagram, each <code>asyncio.Task</code> is represented by the
+function which the task runs. The <code>OSproc</code> thread is an external OS
+process, which is the ultimate "task" of a given watch-do task.</p>
+<div class="mermaid">
+sequenceDiagram
+  participant main
+  participant runTasks
+  participant watchDo
+  participant taskRunner
+  participant captureRetCode
+  participant captureStdout
+  participant OSproc
 
-      <p>This cpawd.taskRunner module implements the running of all watch-do tasks.</p>
-<p>It uses the <code>DebouncingTimer</code> to actually run the tasks after a short
-timeout period. We use this short timeout to ensure the task is only run
-once for any collection of changes detected at nearly the same time.</p>
-<p>The top level <code>runTasks</code> method initiates the <code>asyncio.Tasks</code> which
-represent each watch-do task.</p>
+  activate main
+  main--&gt;&gt;runTasks: run
 
+  activate runTasks
+  runTasks--&gt;&gt;watchDo: create_task
 
+  activate watchDo
+  Note over watchDo,OSproc: running (one watchDo for each watch-do task) ...
+  watchDo--&gt;&gt;watchDo: reStart
 
-  <div class="doc doc-children">
+  watchDo--&gt;&gt;watchDo: stopTaskProc
+  Note over watchDo,OSproc: no task/proc running so stopTaskProc does nothing
 
+  watchDo--&gt;&gt;taskRunner: ensure_future
 
+  activate taskRunner
+  taskRunner--&gt;&gt;taskRunner: sleep
+  Note over taskRunner: a watchDo reStart&lt;br/&gt;at this point&lt;br/&gt;can cancel&lt;br/&gt;taskRunner&lt;br/&gt;while sleeping
+  taskRunner--&gt;&gt;OSproc: exec
+  activate OSproc
+  taskRunner--&gt;&gt;captureStdout: wait on created task
+  activate captureStdout
+  taskRunner--&gt;&gt;captureRetCode: wait on created task
+  activate captureRetCode
 
+  OSproc--&gt;&gt;captureStdout: stdout
+  OSproc--&gt;&gt;captureStdout: stdout
+  OSproc--&gt;&gt;captureStdout: stdout
 
+  Note over watchDo: file system&lt;br/&gt;change detected
+  watchDo--&gt;&gt;watchDo: reStart
+  watchDo--&gt;&gt;watchDo: stopTaskProc
+  watchDo--&gt;&gt;OSproc: send SIGHUP
+  OSproc--&gt;&gt;captureRetCode: finished
+  deactivate OSproc
+  captureRetCode--&gt;&gt;taskRunner: finished
+  deactivate captureRetCode
+  watchDo--&gt;&gt;captureStdout: continueCapturingStdout = False
+  captureStdout--&gt;&gt;taskRunner: finished
+  deactivate captureStdout
+  watchDo--&gt;&gt;taskRunner: wait
+  taskRunner--&gt;&gt;watchDo: done
+  deactivate taskRunner
 
+  watchDo--&gt;&gt;taskRunner: ensure_future
+  activate taskRunner
+  Note over taskRunner,OSproc:  new taskRunner starts ...
+  taskRunner--&gt;&gt;watchDo: done
+  deactivate taskRunner
 
+  main--&gt;&gt;runTasks: shutdown
 
-  <div class="doc doc-object doc-class">
+  runTasks--&gt;&gt;watchDo: stop listening for&lt;br/&gt;file system events
 
+  runTasks--&gt;&gt;watchDo: stop debouncing timers
+  watchDo--&gt;&gt;watchDo: stopTaskProc
 
+  watchDo--&gt;&gt;runTasks: done
+  deactivate watchDo
 
-<h2 id="cpawd.taskRunner.DebouncingTimer" class="doc doc-heading">
-        <code>DebouncingTimer</code>
+  runTasks--&gt;&gt;main: done
+  deactivate runTasks
 
-
-
+  deactivate main
+</div>
+<hr/>
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer">
+<code>DebouncingTimer</code>
 </h2>
-
-    <div class="doc doc-contents ">
-
-      <p>The DebouncingTimer class implements a simple timer to ensure multiple
-file system events result in only one invocation of the task command.</p>
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h3 id="cpawd.taskRunner.DebouncingTimer.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">taskName</span><span class="p">,</span> <span class="n">taskDetails</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
+<div class="doc doc-contents">
+<p>The DebouncingTimer class implements a simple timer to ensure
+multiple file system events result in only one invocation of the task
+command. </p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.__init__">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">taskName</span><span class="p">,</span> <span class="n">taskDetails</span><span class="p">,</span> <span class="n">taskLog</span><span class="p">,</span> <span class="n">terminateSignal</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-special"><code>special</code></small>
+</span>
 </h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Create the timer with a specific timeout and task definition.</p>
+<div class="doc doc-contents">
+<p>Create the timer with a specific timeout and task definition.</p>
 <p>The taskDetails provides the command to run, the log file used to
 record command output, as well as the project directory in which to
-run the command.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>cpawd/taskRunner.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">taskName</span><span class="p">,</span> <span class="n">taskDetails</span><span class="p">)</span> <span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  Create the timer with a specific timeout and task definition.</span>
+run the command. </p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">taskName</span><span class="p">,</span> <span class="n">taskDetails</span><span class="p">,</span> <span class="n">taskLog</span><span class="p">,</span> <span class="n">terminateSignal</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">""" Create the timer with a specific timeout and task definition.</span>
 
 <span class="sd">  The taskDetails provides the command to run, the log file used to</span>
 <span class="sd">  record command output, as well as the project directory in which to</span>
-<span class="sd">  run the command.</span>
-
-<span class="sd">  &quot;&quot;&quot;</span>
+<span class="sd">  run the command. """</span>
 
   <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span>    <span class="o">=</span> <span class="n">timeout</span>
   <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span>   <span class="o">=</span> <span class="n">taskName</span>
-  <span class="bp">self</span><span class="o">.</span><span class="n">taskCmd</span>    <span class="o">=</span> <span class="n">taskDetails</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]</span>
-  <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span>    <span class="o">=</span> <span class="n">taskDetails</span><span class="p">[</span><span class="s1">&#39;logFile&#39;</span><span class="p">]</span>
-  <span class="bp">self</span><span class="o">.</span><span class="n">taskDir</span>    <span class="o">=</span> <span class="n">taskDetails</span><span class="p">[</span><span class="s1">&#39;projectDir&#39;</span><span class="p">]</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">taskCmd</span>    <span class="o">=</span> <span class="n">taskDetails</span><span class="p">[</span><span class="s1">'cmd'</span><span class="p">]</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">taskCmdStr</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">taskDetails</span><span class="p">[</span><span class="s1">'cmd'</span><span class="p">])</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span>    <span class="o">=</span> <span class="n">taskLog</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">taskDir</span>    <span class="o">=</span> <span class="n">taskDetails</span><span class="p">[</span><span class="s1">'projectDir'</span><span class="p">]</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">termSignal</span> <span class="o">=</span> <span class="n">terminateSignal</span>
   <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">proc</span>       <span class="o">=</span> <span class="kc">None</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">pid</span>        <span class="o">=</span> <span class="kc">None</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span>    <span class="o">=</span> <span class="kc">None</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">continueCapturingStdout</span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h3 id="cpawd.taskRunner.DebouncingTimer.reStart" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">reStart</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.cancelTimer">
+<code class="highlight language-python"><span class="n">cancelTimer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 </h3>
+<div class="doc doc-contents">
+<p>Cancel the Debouncing timer</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cancelTimer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">"""Cancel the Debouncing timer"""</span>
 
-    <div class="doc doc-contents ">
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">procIsRunning</span><span class="p">()</span> <span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Cancelling timer for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.captureOutput">
+<code class="highlight language-python"><span class="n">captureOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
+</h3>
+<div class="doc doc-contents">
+<p>Capture the (stdout) output from the external process</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">captureOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">"""Capture the (stdout) output from the external process"""</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"CaptureOutput task running for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+  <span class="n">taskLog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span>
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+    <span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="k">if</span> <span class="n">stdout</span> <span class="p">:</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">============================================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">) stdout @ </span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span>
+      <span class="p">))</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskCmdStr</span><span class="p">))</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"----------------------------------------------------------------------------</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+      <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">continueCapturingStdout</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stdout</span><span class="o">.</span><span class="n">at_eof</span><span class="p">()</span> <span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Collecting </span><span class="si">{}</span><span class="s2"> stdout (</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span>
+        <span class="p">))</span>
+        <span class="n">aLine</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">aLine</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+        <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">continueCapturingStdout</span> <span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finshed collecting </span><span class="si">{}</span><span class="s2"> stdout (</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span>
+        <span class="p">))</span>
+      <span class="k">else</span> <span class="p">:</span>
+        <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[Stopped collecting stdout]"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Stopped collecting process stdout for </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span>
+        <span class="p">))</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">----------------------------------------------------------------------------</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">) stdout @ </span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span>
+      <span class="p">))</span>
+      <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="k">else</span> <span class="p">:</span>
+      <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"No stdout found for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+  <span class="k">else</span> <span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"No external process found so no stdout captured for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"CaptureOutput task finished for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.captureRetCode">
+<code class="highlight language-python"><span class="n">captureRetCode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
+</h3>
+<div class="doc doc-contents">
+<p>Wait for and capture the return code of the external process</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">captureRetCode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">"""Wait for and capture the return code of the external process"""</span>
 
-      <p>(Re)Start the timer. If the timer is already started, it is restarted
-with a new timeout period.</p>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Capturing return code for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+  <span class="k">try</span> <span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+  <span class="k">except</span> <span class="ne">ProcessLookupError</span> <span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"No process found for </span><span class="si">{}</span><span class="s2"> (pid:</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span>
+    <span class="p">))</span>
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+    <span class="n">retCode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Return code for </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> (pid:</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">retCode</span><span class="p">,</span> <span class="n">pid</span>
+    <span class="p">))</span>
+    <span class="n">taskLog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span>
+    <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> task (</span><span class="si">{}</span><span class="s2">) exited with </span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">retCode</span>
+    <span class="p">))</span>
+    <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">taskLog</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finished </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">) command [</span><span class="si">{}</span><span class="s2">] exited with </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskCmdStr</span><span class="p">,</span> <span class="n">retCode</span>
+    <span class="p">))</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">proc</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Captured return code for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.procIsRunning">
+<code class="highlight language-python"><span class="n">procIsRunning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Determine if an external process is (still) running</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">procIsRunning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">"""Determine if an external process is (still) running"""</span>
 
-        <details class="quote">
-          <summary>Source code in <code>cpawd/taskRunner.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reStart</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.reStart">
+<code class="highlight language-python"><span class="n">reStart</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
+</h3>
+<div class="doc doc-contents">
+<p>(Re)Start the timer. If the timer is already started, it is
+restarted with a new timeout period. </p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">reStart</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">""" (Re)Start the timer. If the timer is already started, it is</span>
+<span class="sd">  restarted with a new timeout period. """</span>
 
-<span class="sd">  (Re)Start the timer. If the timer is already started, it is restarted</span>
-<span class="sd">  with a new timeout period.</span>
-
-<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stopTaskProc</span><span class="p">()</span>
 
   <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span> <span class="p">:</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cancelTimer</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span><span class="o">.</span><span class="n">done</span><span class="p">()</span> <span class="p">:</span>
+      <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Waiting for the previous taskRunner task for </span><span class="si">{}</span><span class="s2"> to finish"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+      <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span><span class="p">])</span>
+
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Starting new taskRunner for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
   <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskRunner</span><span class="p">())</span>
 </code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h3 id="cpawd.taskRunner.DebouncingTimer.taskRunner" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">taskRunner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-async"><code>async</code></small>
-  </span>
-
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.stopTaskProc">
+<code class="highlight language-python"><span class="n">stopTaskProc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
 </h3>
+<div class="doc doc-contents">
+<p>Stop the external process</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">stopTaskProc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">"""Stop the external process"""</span>
 
-    <div class="doc doc-contents ">
-
-      <p>Run the task's command, after sleeping for the timeout period, using
-<code>asyncio.create_subprocess_shell</code> command.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>cpawd/taskRunner.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">taskRunner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">  Run the task&#39;s command, after sleeping for the timeout period, using</span>
-<span class="sd">  `asyncio.create_subprocess_shell` command.</span>
-
-<span class="sd">  &quot;&quot;&quot;</span>
-
-  <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
-  <span class="n">proc</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_subprocess_shell</span><span class="p">(</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">taskCmd</span><span class="p">,</span>
-    <span class="n">stdout</span><span class="o">=</span><span class="n">asyncio</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-    <span class="n">stderr</span><span class="o">=</span><span class="n">asyncio</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span>
-    <span class="n">cwd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">taskDir</span>
-  <span class="p">)</span>
-
-  <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="k">await</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-
-  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ran: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">stdout</span><span class="p">:</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">============================================================================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> stdout @ </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)))</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskCmd</span><span class="p">))</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-  <span class="k">if</span> <span class="n">stderr</span><span class="p">:</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">============================================================================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> stderr @ </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)))</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskCmd</span><span class="p">))</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;----------------------------------------------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">taskLog</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Attempting to stop the task process for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">continueCapturingStdout</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Process found for </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">pid</span><span class="p">))</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">procIsRunning</span><span class="p">()</span> <span class="p">:</span>
+      <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Process still running for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Sending OS signal (</span><span class="si">{}</span><span class="s2">) to </span><span class="si">{}</span><span class="s2"> (pid:</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">termSignal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">pid</span>
+        <span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">termSignal</span><span class="p">)</span>
+      <span class="k">except</span> <span class="ne">ProcessLookupError</span> <span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"No exiting external process found for </span><span class="si">{}</span><span class="s2"> (pid:</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">pid</span>
+        <span class="p">))</span>
+      <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Could not send signal (</span><span class="si">{}</span><span class="s2">) to proc for </span><span class="si">{}</span><span class="s2"> (})"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">termSignal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="n">pid</span>
+        <span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+        <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+    <span class="k">else</span> <span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span>
+      <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Process finished with return code </span><span class="si">{}</span><span class="s2"> for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span>
+      <span class="p">))</span>
+  <span class="k">else</span> <span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"No external process found for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
 </code></pre></div>
-        </details>
-    </div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="cpawd.taskRunner.DebouncingTimer.taskRunner">
+<code class="highlight language-python"><span class="n">taskRunner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
+</h3>
+<div class="doc doc-contents">
+<p>Run the task's command, after sleeping for the timeout period,
+using <code>asyncio.create_subprocess_exec</code> command. </p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">taskRunner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">""" Run the task's command, after sleeping for the timeout period,</span>
+<span class="sd">  using `asyncio.create_subprocess_exec` command. """</span>
 
-  </div>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"TaskRunner for </span><span class="si">{}</span><span class="s2"> sleeping for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span>
+    <span class="p">))</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
 
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h2 id="cpawd.taskRunner.runTasks" class="doc doc-heading">
+    <span class="c1"># Now we can run the new task...</span>
+    <span class="c1">#</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Running </span><span class="si">{}</span><span class="s2"> command [</span><span class="si">{}</span><span class="s2">]"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskCmdStr</span>
+    <span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proc</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_subprocess_exec</span><span class="p">(</span>
+      <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">taskCmd</span><span class="p">,</span>
+      <span class="n">stdout</span><span class="o">=</span><span class="n">asyncio</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+      <span class="n">stderr</span><span class="o">=</span><span class="n">asyncio</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span>
+      <span class="n">cwd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">taskDir</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">continueCapturingStdout</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Ran: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="c1">#await asyncio.gather(</span>
+    <span class="k">await</span>  <span class="bp">self</span><span class="o">.</span><span class="n">captureOutput</span><span class="p">(),</span>
+    <span class="k">await</span>  <span class="bp">self</span><span class="o">.</span><span class="n">captureRetCode</span><span class="p">()</span>
+    <span class="c1">#)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">retCode</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"FAILED: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">retCode</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+  <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Caught exception while running </span><span class="si">{}</span><span class="s2"> task"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taskName</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h2 class="doc doc-heading" id="cpawd.taskRunner.runTasks">
 <code class="highlight language-python"><span class="n">runTasks</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-async"><code>async</code></small>
-  </span>
-
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
 </h2>
+<div class="doc doc-contents">
+<p>Walk through the list of watch-do tasks and create an <code>asyncio.Task</code>
+for each task, using an invocation of the <code>watchDo</code> method to wrap each
+task. Since these tasks are not Python-CPU bound, they will essentially
+"run" in parallel. </p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">runTasks</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">""" Walk through the list of watch-do tasks and create an `asyncio.Task`</span>
+<span class="sd">  for each task, using an invocation of the `watchDo` method to wrap each</span>
+<span class="sd">  task. Since these tasks are not Python-CPU bound, they will essentially</span>
+<span class="sd">  "run" in parallel. """</span>
 
-    <div class="doc doc-contents ">
-
-      <p>Walk through the list of watch-do tasks and create an <code>asyncio.Task</code> for
-each task, using an invocation of the <code>watchDo</code> method to wrap each task.
-Since these tasks are not Python-CPU bound, they will essentially "run"
-in parallel.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>cpawd/taskRunner.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">runTasks</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">  Walk through the list of watch-do tasks and create an `asyncio.Task` for</span>
-<span class="sd">  each task, using an invocation of the `watchDo` method to wrap each task.</span>
-<span class="sd">  Since these tasks are not Python-CPU bound, they will essentially &quot;run&quot;</span>
-<span class="sd">  in parallel.</span>
-
-<span class="sd">  &quot;&quot;&quot;</span>
-
-  <span class="n">cpawdFuture</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">create_future</span><span class="p">()</span>
-  <span class="k">for</span> <span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;tasks&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">:</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">watchDo</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">))</span>
-  <span class="k">await</span> <span class="n">cpawdFuture</span>
+  <span class="k">for</span> <span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">'tasks'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">watchDo</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">))</span>
+  <span class="k">await</span> <span class="n">waitForShutdown</span><span class="p">()</span>
 </code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h2 id="cpawd.taskRunner.watchDo" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">watchDo</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-async"><code>async</code></small>
-  </span>
-
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h2 class="doc doc-heading" id="cpawd.taskRunner.stopTasks">
+<code class="highlight language-python"><span class="n">stopTasks</span><span class="p">()</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
 </h2>
+<div class="doc doc-contents">
+<p>Stop all watch-do tasks</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">stopTasks</span><span class="p">()</span> <span class="p">:</span>
+  <span class="sd">"""Stop all watch-do tasks"""</span>
 
-    <div class="doc doc-contents ">
+  <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Stopping all tasks"</span><span class="p">)</span>
 
-      <p>Setup and manage the watches, and then run the task's command using the
-DebouncingTimer whenever a change is detected in a watched directory or
-file.</p>
+  <span class="k">for</span> <span class="n">aWatcher</span> <span class="ow">in</span> <span class="n">watchers</span> <span class="p">:</span>
+    <span class="n">aWatcher</span><span class="o">.</span><span class="n">stopWatchingFileSystem</span><span class="p">()</span>
 
-        <details class="quote">
-          <summary>Source code in <code>cpawd/taskRunner.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">watchDo</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">)</span> <span class="p">:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">aTimer</span> <span class="ow">in</span> <span class="n">debouncingTimers</span> <span class="p">:</span>
+    <span class="k">await</span> <span class="n">aTimer</span><span class="o">.</span><span class="n">stopTaskProc</span><span class="p">()</span>
+    <span class="n">aTimer</span><span class="o">.</span><span class="n">cancelTimer</span><span class="p">()</span>
 
-<span class="sd">  Setup and manage the watches, and then run the task&#39;s command using the</span>
-<span class="sd">  DebouncingTimer whenever a change is detected in a watched directory or</span>
-<span class="sd">  file.</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"All tasks Stoped"</span><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h2 class="doc doc-heading" id="cpawd.taskRunner.waitForShutdown">
+<code class="highlight language-python"><span class="n">waitForShutdown</span><span class="p">()</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
+</h2>
+<div class="doc doc-contents">
+<p>Wait for the shutdown event and then stop all watch-do tasks</p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">waitForShutdown</span><span class="p">()</span> <span class="p">:</span>
+  <span class="sd">"""Wait for the shutdown event and then stop all watch-do tasks"""</span>
 
-<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"waiting for eventual shutdown event"</span><span class="p">)</span>
+  <span class="k">await</span> <span class="n">shutdownTasks</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"got shutdown"</span><span class="p">)</span>
+  <span class="k">await</span> <span class="n">stopTasks</span><span class="p">()</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"shutdown"</span><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h2 class="doc doc-heading" id="cpawd.taskRunner.watchDo">
+<code class="highlight language-python"><span class="n">watchDo</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-async"><code>async</code></small>
+</span>
+</h2>
+<div class="doc doc-contents">
+<p>Setup and manage the watches, and then run the task's command using
+the DebouncingTimer whenever a change is detected in a watched directory
+or file. </p>
+<details class="quote">
+<summary>Source code in <code>cpawd/taskRunner.py</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">watchDo</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">""" Setup and manage the watches, and then run the task's command using</span>
+<span class="sd">  the DebouncingTimer whenever a change is detected in a watched directory</span>
+<span class="sd">  or file. """</span>
 
-  <span class="n">aWatcher</span> <span class="o">=</span> <span class="n">FSWatcher</span><span class="p">()</span>
-  <span class="n">aTimer</span>   <span class="o">=</span> <span class="n">DebouncingTimer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">)</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Starting watchDo for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">))</span>
+  <span class="n">aWatcher</span> <span class="o">=</span> <span class="n">FSWatcher</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+  <span class="n">watchers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aWatcher</span><span class="p">)</span>
+  <span class="n">taskLog</span>  <span class="o">=</span> <span class="k">await</span> <span class="n">aiofiles</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">aTask</span><span class="p">[</span><span class="s1">'logFilePath'</span><span class="p">],</span> <span class="s1">'w'</span><span class="p">)</span>
+  <span class="n">aTimer</span>   <span class="o">=</span> <span class="n">DebouncingTimer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">aTaskName</span><span class="p">,</span> <span class="n">aTask</span><span class="p">,</span> <span class="n">taskLog</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGHUP</span><span class="p">)</span>
+  <span class="n">debouncingTimers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aTimer</span><span class="p">)</span>
 
   <span class="c1"># add watches</span>
   <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">aWatcher</span><span class="o">.</span><span class="n">managePathsToWatchQueue</span><span class="p">())</span>
-  <span class="k">for</span> <span class="n">aWatch</span> <span class="ow">in</span> <span class="n">aTask</span><span class="p">[</span><span class="s1">&#39;watch&#39;</span><span class="p">]</span> <span class="p">:</span>
-    <span class="k">await</span> <span class="n">aWatcher</span><span class="o">.</span><span class="n">watchAPath</span><span class="p">(</span><span class="n">aWatch</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">aWatch</span> <span class="ow">in</span> <span class="n">aTask</span><span class="p">[</span><span class="s1">'watch'</span><span class="p">]</span> <span class="p">:</span>
+    <span class="k">await</span> <span class="n">aWatcher</span><span class="o">.</span><span class="n">watchARootPath</span><span class="p">(</span><span class="n">aWatch</span><span class="p">)</span>
+
+  <span class="c1"># Ensure the task is run at least once</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"First run of taskRunner for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">aTaskName</span><span class="p">))</span>
+  <span class="k">await</span> <span class="n">aTimer</span><span class="o">.</span><span class="n">reStart</span><span class="p">()</span>
 
   <span class="c1"># watch and run cmd</span>
-  <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">aWatcher</span><span class="o">.</span><span class="n">watchForFileSystemEvents</span><span class="p">()</span> <span class="p">:</span>
-    <span class="n">aTimer</span><span class="o">.</span><span class="n">reStart</span><span class="p">()</span>
+  <span class="k">if</span> <span class="s1">'runOnce'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">aTask</span> <span class="p">:</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">aWatcher</span><span class="o">.</span><span class="n">watchForFileSystemEvents</span><span class="p">()</span> <span class="p">:</span>
+      <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"File system event mask </span><span class="si">{}</span><span class="s2"> for file [</span><span class="si">{}</span><span class="s2">] for task </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">getMaskName</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">mask</span><span class="p">),</span> <span class="n">event</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">aTaskName</span>
+      <span class="p">))</span>
+      <span class="k">await</span> <span class="n">aTimer</span><span class="o">.</span><span class="n">reStart</span><span class="p">()</span>
 </code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-                
-              
-              
-                
-
-
-              
-            </article>
-          </div>
-        </div>
-        
-      </main>
-      
-        
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../loadConfiguration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: cpawd.loadConfiguration" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: cpawd.loadConfiguration" class="md-footer__link md-footer__link--prev" href="../loadConfiguration/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
                 Previous
               </span>
               cpawd.loadConfiguration
             </div>
-          </div>
-        </a>
-      
-      
-    </nav>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
         
         Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
           Material for MkDocs
         </a>
-        
-      </div>
-      
-    </div>
-  </div>
+        •
+<a href="https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin/" target="_blank">MkDocs Awesome Pages</a>
+•
+<a href="https://mkdocstrings.github.io/" target="_blank">MkDocStrings</a>
+•
+<a href="https://github.com/fralau/mkdocs-mermaid2-plugin" target="_blank">MkDocs Mermaid2</a>
+•
+<a href="https://www.mkdocs.org" target="_blank">MkDocs</a>
+</div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
-    
-    
-      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
-      
-    
-  </body>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+<script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+<script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script><script>mermaid.initialize({});</script></body>
 </html>
