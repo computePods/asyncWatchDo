@@ -136,8 +136,8 @@ def loadConfig(cliArgs) :
         aTask
       )
 
-    if 'watch' not in aTask or not aTask['watch'] :
-      taskError("all tasks MUST have a collection of files/directories to watch\nno 'watch' list provided in task [{}]:".format(aTaskName), aTask)
+    if 'runOnce' not in aTask and ('watch' not in aTask or not aTask['watch']) :
+      taskError("all tasks, which are not runOnce, MUST have a collection of files/directories to watch\nno 'watch' list provided in task [{}]:".format(aTaskName), aTask)
     expandedWatches = []
     for aWatch in aTask['watch'] :
       newWatch = os.path.expanduser(aWatch)
