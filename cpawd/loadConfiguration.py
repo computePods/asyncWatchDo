@@ -96,13 +96,19 @@ def loadConfig(cliArgs) :
   if cliArgs.debug :
     config['debug'] = cliArgs.debug
 
-  cliArgs.config.insert(0,'cpawdConfig.yaml')
-  for aConfigPath in cliArgs.config :
+  unLoadedConfig = cliArgs.config.copy()
+  unLoadedConfig.insert(0,'cpawdConfig.yaml')
+  while 0 < len(unLoadedConfig) :
+    aConfigPath = unLoadedConfig[0]
+    del unLoadedConfig[0]
     if os.path.exists(aConfigPath) :
       try :
         with open(aConfigPath) as aConfigFile :
           aConfig = yaml.safe_load(aConfigFile.read())
           mergeYamlData(config, aConfig, "")
+        if 'include' in config :
+          unLoadedConfig.extend(config['include'])
+          del config['include']
       except Exception as err :
         print("Could not load configuration from [{}]".format(aConfigPath))
         print(err)
@@ -136,8 +142,11 @@ def loadConfig(cliArgs) :
         aTask
       )
 
-    if 'runOnce' not in aTask and ('watch' not in aTask or not aTask['watch']) :
-      taskError("all tasks, which are not runOnce, MUST have a collection of files/directories to watch\nno 'watch' list provided in task [{}]:".format(aTaskName), aTask)
+    if 'watch' not in aTask or not aTask['watch'] :
+      if 'runOnce' in aTask :
+        aTask['watch'] = []
+      else :
+        taskError("all tasks, which are not runOnce, MUST have a collection of files/directories to watch\nno 'watch' list provided in task [{}]:".format(aTaskName), aTask)
     expandedWatches = []
     for aWatch in aTask['watch'] :
       newWatch = os.path.expanduser(aWatch)
