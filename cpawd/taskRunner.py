@@ -304,11 +304,9 @@ class DebouncingTimer:
       self.retCode = None
       self.continueCapturingStdout = True
       print(f'Ran: {self.taskName}')
-      #await asyncio.gather(
       await  self.captureOutput(),
       await  self.captureRetCode()
-      #)
-      if self.retCode is None or self.retCode != 0 :
+      if self.continueCapturingStdout and (self.retCode is None or self.retCode != 0) :
         print(f"FAILED: {self.taskName} ({self.retCode})")
     except Exception as err :
       print("Caught exception while running {} task".format(self.taskName))
