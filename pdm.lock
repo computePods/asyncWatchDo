@@ -36,6 +36,7 @@ content_hash = "sha256:ae0bd628df046a5f721e322343b4329f7997a2c49c081f998dddc32a3
 ]
 "asyncinotify 2.0.2" = [
     {file = "asyncinotify-2.0.2-py3-none-any.whl", hash = "sha256:26fa85d282df0066ab423cd96754d7ea07e6013d8a69a51e573303dbd0d2dff6"},
+    {file = "asyncinotify-2.0.2.tar.gz", hash = "sha256:867cc056d88fc07aa8b3d1dc5b9c3c911cdd6130a4df5f67beb1fdecfd37b164"},
 ]
 "pyyaml 5.4.1" = [
     {file = "PyYAML-5.4.1-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:3b2b1824fe7112845700f815ff6a489360226a5609b96ec2190a45e62a9fc922"},
