@@ -132,6 +132,7 @@ sequenceDiagram
 import aiofiles
 import asyncio
 import logging
+import os
 import signal
 import time
 import traceback
@@ -337,6 +338,11 @@ async def watchDo(aTaskName, aTask) :
   or file. """
 
   logger.debug("Starting watchDo for {}".format(aTaskName))
+
+  if 'env' in aTask :
+    for aKey, aValue in aTask['env'].items() :
+      os.environ[aKey] = aValue
+
   aWatcher = FSWatcher(logger)
   watchers.append(aWatcher)
   taskLog  = await aiofiles.open(aTask['logFilePath'], 'w')

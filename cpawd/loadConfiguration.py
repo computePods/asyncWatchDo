@@ -172,6 +172,17 @@ def loadConfig(cliArgs) :
       print(yaml.dump(aTask['cmd']))
       print(repr(err))
 
+    if 'env' in aTask :
+      try :
+        newEnv = { }
+        for aKey, aValue in aTask['env'].items() :
+          newEnv[aKey] = aValue.format(**config['tasks'])
+        aTask['env'] = newEnv
+      except Exception as err :
+        print("Could not expand variables in env string:")
+        print(yaml.dump(aTask['env']))
+        print(repr(err))
+
     if 'toolTips' in aTask :
       try :
         aTask['toolTips'] = aTask['toolTips'].format(**config['tasks'])
