@@ -137,197 +137,12 @@ import signal
 import time
 import traceback
 
-from .fsWatcher import getMaskName, FSWatcher
+from cputils.debouncingTaskRunner import FileLogger, DebouncingTaskRunner
+
+#from cpawd.fsWatcher import getMaskName, FSWatcher
+from cputils.fsWatcher import getMaskName, FSWatcher
 
 logger = logging.getLogger("taskRunner")
-
-class DebouncingTimer:
-  """ The DebouncingTimer class implements a simple timer to ensure
-  multiple file system events result in only one invocation of the task
-  command. """
-
-  def __init__(self, timeout, taskName, taskDetails, taskLog, terminateSignal) :
-    """ Create the timer with a specific timeout and task definition.
-
-    The taskDetails provides the command to run, the log file used to
-    record command output, as well as the project directory in which to
-    run the command. """
-
-    self.timeout    = timeout
-    self.taskName   = taskName
-    self.taskCmd    = taskDetails['cmd']
-    self.taskCmdStr = " ".join(taskDetails['cmd'])
-    self.taskLog    = taskLog
-    self.taskDir    = taskDetails['projectDir']
-    self.termSignal = terminateSignal
-    self.taskFuture = None
-    self.proc       = None
-    self.pid        = None
-    self.retCode    = None
-    self.continueCapturingStdout = True
-
-  def cancelTimer(self) :
-    """Cancel the Debouncing timer"""
-
-    if self.taskFuture and not self.procIsRunning() :
-      logger.debug("Cancelling timer for {}".format(self.taskName))
-      self.taskFuture.cancel()
-
-  def procIsRunning(self) :
-    """Determine if an external process is (still) running"""
-
-    return self.proc is not None and self.proc.returncode is None
-
-  async def stopTaskProc(self) :
-    """Stop the external process"""
-
-    logger.debug("Attempting to stop the task process for {}".format(self.taskName))
-    self.continueCapturingStdout = False
-    if self.proc is not None :
-      pid = self.proc.pid
-      logger.debug("Process found for {} ({})".format(self.taskName, pid))
-      if self.procIsRunning() :
-        logger.debug("Process still running for {}".format(self.taskName))
-        try:
-          logger.debug("Sending OS signal ({}) to {} (pid:{})".format(
-            self.termSignal, self.taskName, pid
-          ))
-          self.proc.send_signal(self.termSignal)
-        except ProcessLookupError :
-          logger.debug("No exiting external process found for {} (pid:{})".format(
-            self.taskName, pid
-          ))
-        except Exception as err:
-          logger.error("Could not send signal ({}) to proc for {} (})".format(
-            self.termSignal, self.taskName, pid
-          ))
-          logger.error(repr(err))
-          traceback.print_exc()
-      else :
-        self.retCode = self.proc.returncode
-        logger.debug("Process finished with return code {} for {}".format(
-          self.retCode, self.taskName
-        ))
-    else :
-      logger.debug("No external process found for {}".format(self.taskName))
-
-  async def captureOutput(self) :
-    """Capture the (stdout) output from the external process"""
-    logger.debug("CaptureOutput task running for {}".format(self.taskName))
-    taskLog = self.taskLog
-    if self.proc is not None :
-      stdout = self.proc.stdout
-      if stdout :
-        await taskLog.write("\n============================================================================\n")
-        await taskLog.write("{} ({}) stdout @ {}\n".format(
-          self.taskName, self.proc.pid, time.strftime("%Y/%m/%d %H:%M:%S")
-        ))
-        await taskLog.write("{}\n".format(self.taskCmdStr))
-        await taskLog.write("----------------------------------------------------------------------------\n")
-        await taskLog.flush()
-        while self.continueCapturingStdout and not stdout.at_eof() :
-          logger.debug("Collecting {} stdout ({})".format(
-            self.taskName, self.proc.pid
-          ))
-          aLine = await stdout.readline()
-          await taskLog.write(aLine.decode())
-          await taskLog.flush()
-        if self.continueCapturingStdout :
-          logger.debug("Finshed collecting {} stdout ({})".format(
-            self.taskName, self.proc.pid
-          ))
-        else :
-          await taskLog.write("\n[Stopped collecting stdout]")
-          logger.debug("Stopped collecting process stdout for {} ({})".format(
-            self.taskName, self.pid
-          ))
-        await taskLog.write("\n----------------------------------------------------------------------------\n")
-        await taskLog.write("{} ({}) stdout @ {}\n".format(
-          self.taskName, self.pid, time.strftime("%Y/%m/%d %H:%M:%S")
-        ))
-        await taskLog.flush()
-      else :
-        logger.debug("No stdout found for {}".format(self.taskName))
-    else :
-      logger.debug("No external process found so no stdout captured for {}".format(self.taskName))
-    logger.debug("CaptureOutput task finished for {}".format(self.taskName))
-
-  async def captureRetCode(self) :
-    """Wait for and capture the return code of the external process"""
-
-    logger.debug("Capturing return code for {}".format(self.taskName))
-    try :
-      self.retCode = await self.proc.wait()
-    except ProcessLookupError :
-      logger.debug("No process found for {} (pid:{})".format(
-        self.taskName, self.pid
-      ))
-    if self.retCode is not None :
-      retCode = self.retCode
-      pid = self.pid
-      logger.debug("Return code for {} is {} (pid:{})".format(
-        self.taskName, retCode, pid
-      ))
-      taskLog = self.taskLog
-      await taskLog.write("{} task ({}) exited with {}\n".format(
-        self.taskName, pid, retCode
-      ))
-      await taskLog.write("\n")
-      await taskLog.flush()
-      logger.debug("Finished {} ({}) command [{}] exited with {}".format(
-        self.taskName, pid, self.taskCmdStr, retCode
-      ))
-    self.proc = None
-    logger.debug("Captured return code for {}".format(self.taskName))
-
-  async def taskRunner(self) :
-    """ Run the task's command, after sleeping for the timeout period,
-    using `asyncio.create_subprocess_exec` command. """
-
-    try:
-      logger.debug("TaskRunner for {} sleeping for {}".format(
-        self.taskName, self.timeout
-      ))
-      await asyncio.sleep(self.timeout)
-
-      # Now we can run the new task...
-      #
-      logger.debug("Running {} command [{}]".format(
-        self.taskName, self.taskCmdStr
-      ))
-      self.proc = await asyncio.create_subprocess_exec(
-        *self.taskCmd,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.STDOUT,
-        cwd=self.taskDir
-      )
-      self.pid = self.proc.pid
-      self.retCode = None
-      self.continueCapturingStdout = True
-      print(f'Ran: {self.taskName}')
-      await  self.captureOutput(),
-      await  self.captureRetCode()
-      if self.continueCapturingStdout and (self.retCode is None or self.retCode != 0) :
-        print(f"FAILED: {self.taskName} ({self.retCode})")
-    except Exception as err :
-      print("Caught exception while running {} task".format(self.taskName))
-      print(repr(err))
-      traceback.print_exc()
-
-  async def reStart(self) :
-    """ (Re)Start the timer. If the timer is already started, it is
-    restarted with a new timeout period. """
-
-    await self.stopTaskProc()
-
-    if self.taskFuture :
-      self.cancelTimer()
-      if not self.taskFuture.done() :
-        logger.debug("Waiting for the previous taskRunner task for {} to finish".format(self.taskName))
-        await asyncio.wait([self.taskFuture])
-
-    logger.debug("Starting new taskRunner for {}".format(self.taskName))
-    self.taskFuture = asyncio.ensure_future(self.taskRunner())
 
 watchers         = []
 debouncingTimers = []
@@ -345,8 +160,9 @@ async def watchDo(aTaskName, aTask) :
 
   aWatcher = FSWatcher(logger)
   watchers.append(aWatcher)
-  taskLog  = await aiofiles.open(aTask['logFilePath'], 'w')
-  aTimer   = DebouncingTimer(1, aTaskName, aTask, taskLog, signal.SIGHUP)
+  taskLog  = FileLogger(aTask['logFilePath'], 5)
+  await taskLog.open()
+  aTimer   = DebouncingTaskRunner(1, aTaskName, aTask, taskLog, signal.SIGHUP)
   debouncingTimers.append(aTimer)
 
   # add watches
@@ -376,7 +192,7 @@ async def stopTasks() :
 
   for aTimer in debouncingTimers :
     await aTimer.stopTaskProc()
-    aTimer.cancelTimer()
+    await aTimer.cancelTimer()
 
   logger.debug("All tasks Stoped")
 

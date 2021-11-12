@@ -10,6 +10,7 @@ dependencies = [
     "pyyaml~=5.4",
     "aiofiles~=0.7",
     "aioshutil~=1.1",
+    "ComputePodPythonUtils @ git+https://github.com/computePods/pythonUtils.git",
 ]
 requires-python = ">=3.9"
 dynamic = ["classifiers"]
