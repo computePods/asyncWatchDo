@@ -129,17 +129,12 @@ sequenceDiagram
 # Use psutil.pids() (returns list of pids) to check if the task's pid is
 # still running.
 
-import aiofiles
 import asyncio
 import logging
 import os
 import signal
-import time
-import traceback
 
 from cputils.debouncingTaskRunner import FileLogger, DebouncingTaskRunner
-
-#from cpawd.fsWatcher import getMaskName, FSWatcher
 from cputils.fsWatcher import getMaskName, FSWatcher
 
 logger = logging.getLogger("taskRunner")
